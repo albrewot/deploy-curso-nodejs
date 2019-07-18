@@ -12,6 +12,7 @@ const server = require("http").Server(app);
 const io = require("socket.io").listen(server);
 const bodyParser = require("body-parser");
 const session = require("express-session");
+const cookieSession = require("cookie-session")
 const errorHelper = require("./middlewares/errorHelper");
 const routes = require("./routes");
 const edge = require("express-edge");
@@ -28,19 +29,25 @@ io.on("connection", socket => socketManager(socket, io));
 
 //Middlewares globales
 
-app.use(
-  session({
-    name: "sid",
-    saveUninitialized: false,
-    resave: false,
-    secret: "SECRET_SESSION_KEY",
-    cookie: {
-      maxAge: 1000 * 60 * 60 * 2,
-      sameSite: true,
-      secure: process.env.NODE_ENV === "production"
-    }
-  })
-);
+// app.use(
+//   session({
+//     name: "sid",
+//     saveUninitialized: false,
+//     resave: false,
+//     secret: "SECRET_SESSION_KEY",
+//     cookie: {
+//       maxAge: 1000 * 60 * 60 * 2,
+//       sameSite: true,
+//       secure: process.env.NODE_ENV === "production"
+//     }
+//   })
+// );
+app.use(cookieSession({
+  name: 'sid',
+  keys: ["COOKIE_SECRET"],
+  // Cookie Options
+  maxAge: 24 * 60 * 60 * 1000 // 24 hours
+}))
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(edge);
