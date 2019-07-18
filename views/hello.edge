@@ -1,0 +1,14 @@
+@include('header')
+
+<h2>
+    Hello 
+    
+    @if(username != '')
+    <span>{{ username }}</span>
+    @else
+    <span>Usuario</span>
+    @endif
+</h2>
+
+@include('footer')
+
