@@ -34,7 +34,7 @@ async function getAccessToken(req, res, next) {
         }
       }
     }
-  } catch (err) {}
+  } catch (err) { }
 }
 
 async function login(req, res, next) {
@@ -64,15 +64,18 @@ async function login(req, res, next) {
 }
 
 function logout(req, res, next) {
-  console.log("LOGOUT");
-  console.log(req.session);
-  console.log(req.session.id);
-  console.log(req.sessionID);
-  req.session.destroy(err => {
-    if (err) {
-      res.redirect("/home");
-    }
-    res.clearCookie("sid");
-    res.redirect("/login");
-  });
+  // console.log("LOGOUT");
+  // console.log(req.session);
+  // console.log(req.session.id);
+  // console.log(req.sessionID);
+  // req.session.destroy(err => {
+  //   if (err) {
+  //     res.redirect("/home");
+  //   }
+  //   res.clearCookie("sid");
+  //   res.redirect("/login");
+  // });
+  req.session = null;
+  res.clearCookie("sid");
+  res.redirect("/login");
 }
