@@ -1,5 +1,5 @@
 //Socket
-const socket = io.connect("http://localhost:4001");
+const socket = io.connect(location.origin);
 
 let user;
 let room = 0;
