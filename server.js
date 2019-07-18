@@ -53,6 +53,8 @@ routes(app);
 //Manejador de errores del servidor
 app.use(errorHelper);
 
-server.listen(4001, () => {
-  console.log("Servidor esta escuchando en el puerto 4001");
+const PORT = process.env.PORT || 4001
+
+server.listen(PORT, () => {
+  console.log("Servidor esta escuchando en el puerto " + PORT);
 });
